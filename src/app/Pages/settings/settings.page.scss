@@ -1,0 +1,32 @@
+ion-avatar{
+    
+    width: auto;
+    height: auto;
+    
+    margin: 0 auto;
+
+    
+}
+ion-header{
+    background-color: transparent;
+}
+ion-toolbar{
+    --background: transparent;
+}
+ion-list{
+    --ion-item-background:transparent;
+}
+.cover{
+    
+    border-radius: 10px;
+}
+
+.profilepic{
+    object-fit: cover;
+}
+image-cropper{
+    --cropper-outline-color:rgba(0,0,0,0.642);
+    --cropper-overlay-color:transparent;
+    
+}
+

@@ -1,0 +1,127 @@
+
+
+<ion-content mode="ios">
+
+  <ion-fab  vertical="top" horizontal="start" translucent="false">
+    <ion-fab-button href="/settings" size="small"  color="tertiary">
+      <ion-icon    name="settings"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-grid>
+    <ion-row [ngStyle]="{'background-image':'url('+UserInfo.cover+')'}" class="ion-text-center cover">
+      <ion-col class="profile-pic" size="12">
+        <ion-thumbnail class="profile-pic-tumbnail">
+          <img alt="profile-pic" defaultImage="../../../assets/avatar.svg" [lazyLoad]="UserInfo.profilePicture" />
+        </ion-thumbnail>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center username ">
+      <ion-col size="12">{{UserInfo.displayName}}</ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center ">
+      <ion-col size="12">{{UserInfo.user}}</ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center ">
+      <ion-col size="12">{{UserInfo.description}}</ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center ">
+      <ion-col size="4">{{myPosts.length}}</ion-col>
+      <ion-col size="4">2</ion-col>
+      <ion-col size="4">3</ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center titles">
+      <ion-col size="4">Posts</ion-col>
+      <ion-col size="4">Followers</ion-col>
+      <ion-col size="4">Following</ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center">
+    
+    
+
+      <ion-segment color="tertiary" value="myPosts" (ionChange)="segmentChanged($event)">
+        
+        <ion-segment-button value="myPosts">
+          Posts
+        </ion-segment-button>
+        <ion-segment-button value="friendsPosts">
+          Friend´s Posts
+        </ion-segment-button>
+      </ion-segment>
+    </ion-row>
+    <ion-row *ngIf="visiblePosts=='myPosts'">
+      <ion-col 
+        size="4" 
+        *ngFor="let image of myPosts" >
+        <ion-thumbnail class="posts-tumbnail" >
+          <img defaultImage="../../../assets/Ellie icon.png" [lazyLoad]="image" alt="posts"  (click)="goToImage(image)"/>
+        </ion-thumbnail>
+        
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="visiblePosts=='friendsPosts'">
+      <ion-col 
+        size="4" 
+        *ngFor="let image of friendsPosts" >
+        <ion-thumbnail class="posts-tumbnail" >
+          <img defaultImage="../../../assets/Ellie icon.png" [lazyLoad]="image" alt="posts"  (click)="goToImage(image)"/>
+        </ion-thumbnail>
+        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!--
+  <div class="portrait">
+    <ion-img src="https://cdn.pixabay.com/photo/2020/03/29/20/11/flowers-4982129_960_720.jpg"></ion-img>
+  </div>
+  <div class="card">
+    <div class="image">
+      <ion-thumbnail>
+        <ion-img alt="Silhouette of mountains" src="https://dl.memuplay.com/new_market/img/com.vicman.newprofilepic.icon.2022-06-07-21-33-07.png" ></ion-img>
+      </ion-thumbnail>
+      
+    </div>
+    <div class="card-content">
+      <div class="card-title">
+        <h1 class="ion-no-margin">
+          @captainMarvel
+        </h1>
+        
+        <p class="ion-no-margin"> <sup> $</sup> 500</p>
+        
+      </div>
+      
+      
+      <ion-grid>
+        <ion-row class="ion-text-center">
+          <ion-col size="12">Carol Danvers</ion-col>
+        </ion-row>
+        <ion-row class="ion-text-center">
+          <ion-col size="4">1</ion-col>
+          <ion-col size="4">2</ion-col>
+          <ion-col size="4">3</ion-col>
+        </ion-row>
+        <ion-row class="ion-text-center">
+          <ion-col size="4">Posts</ion-col>
+          <ion-col size="4">Followers</ion-col>
+          <ion-col size="4">Following</ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div class="posts">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Card Title</ion-card-title>
+          <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+        </ion-card-header>
+      
+        <ion-card-content>
+          Here's a small text description for the card content. Nothing more, nothing less.
+        </ion-card-content>
+      </ion-card>  
+    </div>
+  </div>
+  -->
+  
+</ion-content>

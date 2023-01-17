@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "ellie-eliam"
+  },
+  "targets": {
+    "ellie-eliam": {
+      "hosting": {
+        "app": [
+          "ellie-eliam"
+        ]
+      }
+    }
+  }
+}

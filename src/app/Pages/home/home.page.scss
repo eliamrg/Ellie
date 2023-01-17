@@ -1,0 +1,101 @@
+
+ion-col {
+  
+  color: #fff;
+  text-align: center;
+  font-size: medium;
+}
+ion-row{
+   background-color: white;
+    border-radius: 25px;
+}
+ion-button{
+    color: black;
+    
+}
+ion-card{
+    background-color: #8EC5FC;
+    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%); 
+}
+ion-chip{   
+    background-color: white;
+}
+ion-refresher {
+    z-index: 1;
+  }
+.topToolbar {
+    --background:transparent;
+    border-radius: 15px;
+}
+ion-toolbar {
+    --background-color: transparent;
+    --ion-color-base: transparent !important;
+}
+
+.imgHeader{
+    height: 10%;
+}
+.tittleToolBar{
+    
+    
+    font-family: 'Cookie', cursive;
+ 
+    font-size: xx-large;
+    
+}
+.buttonToolBar{
+
+    --background: white;
+    --border-radius: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+ion-card-subtitle{
+    color: black;
+    padding: 6px;
+    /*
+    border-radius: 10px;
+    background-color: #fff;
+    */
+    font-size: medium;
+    margin: auto;
+    text-align: center;
+    
+}
+.caption{
+    padding: 6px;
+    border-radius: 25px;
+    color: black;
+    font-size: medium;
+    font-weight: 500;
+    background-color: #fff;
+}
+ion-content{
+    color: white;
+}
+
+.imagePost{
+    
+    border-radius: 10px;
+    width: 100%;
+}
+
+
+ion-item{
+    border-radius: 25px;
+    --background: white;
+    color: black;
+}
+.buttonlabel{
+    color: black;
+    font-size:small;
+    font-weight: 550;
+}
+
+@media only screen and (min-width: 600px) {
+    .posts{
+        padding-left: 15%;
+        padding-right: 15%;   
+    }
+}

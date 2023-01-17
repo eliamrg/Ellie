@@ -1,0 +1,55 @@
+<ion-header class="ion-no-border" mode="ios">
+  <ion-toolbar class="topToolbar" >
+    <ion-title >
+      
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="ios">
+
+  
+  <ion-header collapse="condense">
+    <ion-toolbar >
+      <ion-title size="large">Your new Post!</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="posts">
+    <ion-card >
+      <ion-card-header>
+          <ion-card-title style="text-align: center;">Say something to the world:</ion-card-title>
+         
+      </ion-card-header>
+    
+      <ion-card-content>
+        <div class="caption">
+          <ion-item lines="none">
+            
+            <ion-input placeholder="Hello World!!"></ion-input>
+          </ion-item>
+          
+        </div>
+        
+        
+        
+        <div *ngIf="picture" style="text-align: center;">
+          <img src="{{picture}}" style="width: 100%; border-radius: 25px;">
+          <br>
+        </div>
+  
+  
+        <ion-button expand="block" color="light" fill="clear" (click)="takePhoto()"  >
+          <ion-icon slot="icon-only" name="camera" ></ion-icon>
+        </ion-button>
+        <ion-button expand="block" color="tertiary" (click)="createPost()">
+          Post
+        </ion-button>
+  
+      </ion-card-content>
+    </ion-card> 
+  </div>
+
+  
+
+</ion-content>

@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+form {
+    margin-top: 6rem;
+  
+    .forgot-password-link {
+      text-decoration: none;
+      display: inline-block;
+      width: 100%;
+      text-align: right;
+      font-weight: 600;
+      font-size: 14px;
+      color: #4a4a4a;
+    }
+    ion-button {
+        display: block;
+        margin-top: 15px;
+        --background: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%);
+        --background-hover: linear-gradient(90deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%);
+
+        font-size: medium;
+        ion-icon{
+            padding-left: 15px;
+        }
+      }
+}
+
+.footer-text {
+    text-align: center;
+    font-size: 17px;
+    margin-top: 25px;
+  
+    a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #fa578e;
+    }
+}
+ion-item{
+    padding-top: 20px;
+}

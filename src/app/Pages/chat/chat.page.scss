@@ -1,0 +1,56 @@
+ion-avatar{
+    padding: 6px;
+}
+ion-header{
+    background-color: transparent;
+}
+ion-item{
+    --background: transparent;
+}
+ion-toolbar{
+    --background: transparent;
+}
+ion-list{
+    --ion-item-background:transparent;
+}
+.my-message{
+    padding-left: 50%;
+    padding-top: 6px;
+    ion-textarea{
+        background: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%); 
+        border-radius: 25px;
+        padding-left: 10px;
+        padding-top: 10px;
+        margin: auto;
+        text-align: right;
+        text-justify: inter-word;
+        color: black;
+        font-size: large;
+        font-weight: 500;
+    }
+}
+
+
+
+
+.others-message{
+    padding-top: 6px;
+    padding-right: 50%;
+    ion-textarea{
+        background-color:#eae0f3;
+        border-radius: 25px;
+        padding-left: 10px;
+        padding-top: 10px;
+        margin: auto;
+        text-align: justify;
+        text-justify: inter-word;
+        color: black;
+        font-size: large;
+        font-weight: 500;
+        
+    }
+    img{
+        
+        border-radius: 25px;
+    }
+}

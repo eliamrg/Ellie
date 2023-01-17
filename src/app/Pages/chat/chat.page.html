@@ -1,0 +1,54 @@
+<ion-header class="ion-no-border" mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button href="/conversations" >
+        <ion-icon color="tertiary" name="arrow-back-outline">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-item lines="none" slot="start">
+      <ion-avatar>
+        <img alt="Silhouette of a person's head" src="https://pbs.twimg.com/profile_images/1426210706991554561/UIqw6kpu_400x400.jpg" />
+      </ion-avatar>
+      <ion-label>
+        <h1>Captain America</h1>
+        <p>@CapCap</p>
+      </ion-label>
+    </ion-item>
+    
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="none">
+    <ion-item class="my-message " lines="none"  >
+      <ion-textarea [readonly]="true" [autoGrow]="true"
+        value="Hellooooo!!">
+      </ion-textarea>
+    </ion-item> 
+    
+    <ion-item  lines="none" class="others-message" >
+      <ion-textarea  [readonly]="true" [autoGrow]="true"
+        value="Hellooooo!!">
+      </ion-textarea>
+    </ion-item>
+    <ion-item  lines="none" class="others-message" >
+      <img  src="https://i.pinimg.com/originals/e2/01/5d/e2015db7c9cb3140afa591111772b52d.jpg"/>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer mode="ios">
+  <ion-toolbar>
+    <ion-item>
+      
+      <ion-textarea placeholder="Your Message"></ion-textarea>
+      <ion-buttons slot="end">
+        <ion-button href="/conversations" >
+          <ion-icon color="tertiary" name="arrow-forward-outline"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

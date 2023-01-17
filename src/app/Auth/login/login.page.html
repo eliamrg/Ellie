@@ -1,0 +1,39 @@
+<!--
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+-->
+<ion-content class="ion-padding" mode="ios">
+  <ion-header collapse="condense">
+    <ion-toolbar >
+      <ion-title size="large">Welcome,</ion-title>
+      
+    </ion-toolbar>
+  </ion-header>
+  <div  class="ion-padding">
+    <ion-label color="medium">Sign in to continue!</ion-label>
+  </div>
+
+  <form novalidate (ngSubmit)="login()" [formGroup]="formLogin" mode="ios">
+    <ion-item color="transparent">
+      <ion-label  position="stacked">Email</ion-label>
+      <ion-input type="email" placeholder="your@email.com" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item color="transparent">
+      <ion-label position="stacked">Password</ion-label>
+      <ion-input type="password" placeholder="Your Password" formControlName="password"></ion-input>
+    </ion-item>
+    <a routerLink="" class="forgot-password-link">Forgot Password?</a>
+
+    <ion-button type="submit" routerLink="/dashboard">Login</ion-button>
+    <ion-button (click)="loginGoogle()">
+      Continue with Google  
+      <ion-icon slot="end" name="logo-google"></ion-icon>
+      
+    </ion-button>
+    
+  </form>
+  <p class="footer-text">I'm a new user, <a routerLink="/register">Sign Up</a></p>
+</ion-content>

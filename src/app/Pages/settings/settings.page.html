@@ -1,0 +1,217 @@
+<ion-header class="ion-no-border" mode="ios">
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()"  >
+        <ion-icon color="tertiary" name="arrow-back-outline">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="ios">
+
+  <ion-card color="transparent" *ngIf="!verified" >
+    <ion-card-header color="danger">
+      <ion-card-title>Email not verified </ion-card-title>
+      <ion-card-subtitle>{{email}}</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content class="ion-text-center">
+      <h2 style="padding-top: 6px;padding-bottom: 6px;">SOME ACTIONS WILL BE BLOCKED UNTIL YOU VERIFY YOUR EMAIL</h2>
+      <h2 style="padding-top: 6px;padding-bottom: 6px;">To verify your email, click the button and check your inbox</h2>
+      <ion-button (click)="verifyEmail()" color="warning" expand="block" >{{emailVerificationButtonText}}</ion-button>
+      <h2 *ngIf="sentVerification">SENT. It could have gone to the spam folder.</h2>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card color="transparent">
+    <ion-card-header>
+      <ion-card-title>Edit Profile</ion-card-title>
+      <ion-card-subtitle>In this section you can customize your profile page</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4">
+            <ion-avatar>
+              <img alt="Profile Picture" defaultImage="../../../assets/avatar.svg" [lazyLoad]="UserInfo.profilePicture" />
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="8">
+            <img class="cover" defaultImage="../../../assets/cover.jpg" [lazyLoad]="UserInfo.cover"/>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="4">
+            <ion-button (click)="changeProfilePicture()" expand="block" color="transparent" > 
+              <ion-icon color="dark" slot="icon-only" name="camera-reverse-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="8">
+            <ion-button (click)="changeCoverPicture()" expand="block" color="transparent"  > 
+              <ion-icon color="dark" slot="icon-only" name="camera-reverse-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="myImage">
+          <ion-col size="12">
+            
+            <image-cropper
+            #cropper
+                [imageBase64]="myImage"
+                [maintainAspectRatio]="true"
+                [hideResizeSquares]="isMobile"
+                [aspectRatio]="aspectRatio"
+                format="png"
+                (imageCropped)="imageCropped($event)"
+                (imageLoaded)="imageLoaded()"
+                (loadImageFailed)="loadImageFailed()"
+                [transform]="transform"
+            ></image-cropper>
+          </ion-col>
+          
+        </ion-row>
+
+        <ion-row *ngIf="myImage">
+          
+          <ion-col  class="ion-text-center" size="4">
+            <ion-button expand="block" (click)="rotate()">
+              <ion-icon name="refresh" slot="start"></ion-icon>Rotate
+            </ion-button>
+          </ion-col>
+          <ion-col class="ion-text-center" size="4">
+            <ion-button expand="block" (click)="flipHorizontal()">
+              <ion-icon name="swap-horizontal-outline" slot="start"></ion-icon>Flip X
+            </ion-button>
+          </ion-col>
+          <ion-col class="ion-text-center" size="4">
+            <ion-button expand="block" (click)="flipVertical()">
+              <ion-icon name="swap-vertical-outline" slot="start"></ion-icon>Flip Y
+            </ion-button>
+          </ion-col>
+          
+        </ion-row>
+
+        <ion-row *ngIf="myImage">
+          <ion-col size="6">
+            
+            <ion-button (click)="acceptPicture()" color="success" expand="block">
+              <ion-icon name="checkmark-outline"></ion-icon>
+            </ion-button>
+            
+            
+          </ion-col>
+          <ion-col size="6">
+            
+            <ion-button (click)="dismissPicture()" color="danger" expand="block">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+            
+            
+          </ion-col>
+          
+        </ion-row>
+        <ion-row>
+
+          <ion-col>
+
+            <form novalidate  mode="ios">
+              <ion-item  color="transparent">
+                <ion-label style="font-size: large;"  position="stacked">User Name</ion-label>
+                <ion-input value="{{UserInfo.displayName}}" placeholder="Your Name"></ion-input>
+                
+              </ion-item>
+              <ion-item  color="transparent">
+                <ion-label style="font-size: large;"  position="stacked">Presentation:</ion-label>
+                <ion-input value="{{UserInfo.description}}" placeholder="Your Name"></ion-input>
+                
+              </ion-item>
+              
+              <ion-button expand="block" color="tertiary"  type="submit"> 
+                <ion-label>Save</ion-label>
+              </ion-button>
+              
+              
+            </form>
+          </ion-col>
+      
+
+        </ion-row>
+      </ion-grid>
+   
+      
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card color="transparent">
+    <ion-card-header>
+      <ion-card-title>User ID</ion-card-title>
+      <ion-card-subtitle>Share this with your firends so they can find you</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-item lines="none" color="transparent">
+        
+        <ion-input readonly="true" placeholder="Your user" value="{{UserInfo.user}}" ></ion-input>
+        <ion-button slot="end" expand="block" color="transparent"  > 
+          <ion-icon color="dark" slot="icon-only" name="copy-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  
+
+
+  <ion-card color="transparent">
+    <ion-card-header>
+      
+      
+      <ion-card-title>USE AND LICENSE</ion-card-title>
+      <ion-card-subtitle>By creating a profile:</ion-card-subtitle>
+    </ion-card-header>
+  
+    
+    
+    <ion-card-content>
+      <ion-list>
+        <ion-item class="item-text-wrap">
+          <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
+          <p style="text-align: justify;">
+            I understand Ellie maintains various social profiles, messaging accounts, chat rooms, and other online a
+            ctivity which allow users to post, submit, publish, and/or display (collectively, "post") text, images, and 
+            other content (collectively, "User Contributions").
+          </p>
+        </ion-item>
+        <ion-item class="item-text-wrap">
+          <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
+          <p style="text-align: justify;">
+            I understand this Social Media is a public forum and not confidential and that I should not post anything 
+            I wish or am required to keep confidential. I understand that I am responsible for the content of my User 
+            Contributions. 
+          </p>
+        </ion-item>
+        <ion-item style="--padding-top: 6px;" class="item-text-wrap">
+          <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
+          <p style="text-align: justify;">
+            I represent that I will not post any content to Ellie  which: (i) violates applicable law or 
+            the legal rights of another person; (ii) is defamatory, obscene, indecent, abusive, harassing, violent, hateful, 
+            sexually explicit, pornographic, or discriminatory; (iii) is likely to deceive another person.
+          </p>
+        </ion-item>
+        
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button style="padding-bottom: 5px;" expand="block" color="danger" (click)="logOut()">LogOut 
+    <ion-icon slot="end" name="log-out-outline"></ion-icon>
+  </ion-button>
+</ion-content>
+
+

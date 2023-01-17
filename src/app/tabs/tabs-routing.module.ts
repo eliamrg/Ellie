@@ -1,34 +1,51 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ConversationsPage } from '../Pages/conversations/conversations.page';
 import { TabsPage } from './tabs.page';
+import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: 'dashboard',
     component: TabsPage,
     children: [
+      
       {
-        path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        path: 'home',
+        loadChildren: () => import('../Pages/home/home.module').then( m => m.HomePageModule)
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: 'profile',
+        loadChildren: () => import('../Pages/profile/profile.module').then( m => m.ProfilePageModule)
+      },
+      
+      
+      {
+        path: 'notifications',
+        loadChildren: () => import('../Pages/notifications/notifications.module').then( m => m.NotificationsPageModule)
       },
       {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'createPost',
+        loadChildren: () => import('../Pages/create-post/create-post.module').then( m => m.CreatePostPageModule)
+      },
+      
+      {
+        path: 'settings',
+        loadChildren: () => import('../Pages/settings/settings.module').then( m => m.SettingsPageModule)
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/dashboard/home',
         pathMatch: 'full'
       }
-    ]
+    ],
+    ...canActivate(()=>redirectUnauthorizedTo(['/login']))
   },
+  
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/dashboard/home',
     pathMatch: 'full'
   }
 ];
