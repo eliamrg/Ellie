@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CreatePostPageRoutingModule } from './create-post-routing.module';
 
 import { CreatePostPage } from './create-post.page';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CreatePostPageRoutingModule
+    CreatePostPageRoutingModule,
+    ImageCropperModule
   ],
   declarations: [CreatePostPage]
 })

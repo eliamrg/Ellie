@@ -25,24 +25,87 @@
       <ion-card-content>
         <div class="caption">
           <ion-item lines="none">
-            
-            <ion-input placeholder="Hello World!!"></ion-input>
+            <ion-input [(ngModel)]="caption" placeholder="Hello World!!"></ion-input>
           </ion-item>
           
         </div>
         
         
         
-        <div *ngIf="picture" style="text-align: center;">
-          <img src="{{picture}}" style="width: 100%; border-radius: 25px;">
+        <div *ngIf="imageAccepted" style="text-align: center;">
+          <img src="{{croppedImage}}" style="width: 100%; border-radius: 25px;">
           <br>
         </div>
+        <ion-grid>
+          <ion-row *ngIf="picture">
+            <ion-col size="12">
+              
+              <image-cropper
+              #cropper
+                  [imageBase64]="picture"
+                  [maintainAspectRatio]="false"
+                  [hideResizeSquares]="isMobile"
+                  
+                  format="png"
+                  (imageCropped)="imageCropped($event)"
+                  (imageLoaded)="imageLoaded()"
+                  (loadImageFailed)="loadImageFailed()"
+                  [transform]="transform"
+              ></image-cropper>
+            </ion-col>
+            
+          </ion-row>
+  
+          <ion-row *ngIf="picture">
+            
+            <ion-col  class="ion-text-center" size="4">
+              <ion-button expand="block" (click)="rotate()">
+                <ion-icon name="refresh" slot="start"></ion-icon>Rotate
+              </ion-button>
+            </ion-col>
+            <ion-col class="ion-text-center" size="4">
+              <ion-button expand="block" (click)="flipHorizontal()">
+                <ion-icon name="swap-horizontal-outline" slot="start"></ion-icon>Flip X
+              </ion-button>
+            </ion-col>
+            <ion-col class="ion-text-center" size="4">
+              <ion-button expand="block" (click)="flipVertical()">
+                <ion-icon name="swap-vertical-outline" slot="start"></ion-icon>Flip Y
+              </ion-button>
+            </ion-col>
+            
+          </ion-row>
+
+
+          <ion-row *ngIf="picture">
+            <ion-col size="6">
+              
+              <ion-button (click)="acceptPicture()" color="success" expand="block">
+                <ion-icon name="checkmark-outline"></ion-icon>
+              </ion-button>
+              
+              
+            </ion-col>
+            <ion-col size="6">
+              
+              <ion-button (click)="dismissPicture()" color="danger" expand="block">
+                <ion-icon name="close-outline"></ion-icon>
+              </ion-button>
+              
+              
+            </ion-col>
+            
+          </ion-row>
+          
+
+          
+        </ion-grid>
   
   
         <ion-button expand="block" color="light" fill="clear" (click)="takePhoto()"  >
           <ion-icon slot="icon-only" name="camera" ></ion-icon>
         </ion-button>
-        <ion-button expand="block" color="tertiary" (click)="createPost()">
+        <ion-button *ngIf="imageAccepted" expand="block" color="tertiary" (click)="createPost()">
           Post
         </ion-button>
   

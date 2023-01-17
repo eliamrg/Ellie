@@ -14,6 +14,11 @@ ion-item{
     --background: white;
     color: black;
 }
+image-cropper{
+    --cropper-outline-color:rgba(0,0,0,0.642);
+    --cropper-overlay-color:transparent;
+    
+}
 @media only screen and (min-width: 600px) {
     .posts{
         padding-left: 15%;

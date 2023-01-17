@@ -21,6 +21,23 @@ export class StorageService {
     });
   }
 
+
+
+  async uploadPostPicture(postId:any,image:any){
+    const imageRef=ref(this.storage,`Posts/${postId}`);
+    let url
+    await uploadString(imageRef,image,'data_url')
+    .then(async ()=>{
+      await getDownloadURL(imageRef).then(URL=>{
+        url=URL;
+      })
+    });
+    console.log(url);
+    return url;
+
+  }
+
+
   uploadCoverPicture(userID:any, image:any){
     const imageRef=ref(this.storage,`CoverPictures/${userID}`);
     uploadString(imageRef,image,'data_url')
