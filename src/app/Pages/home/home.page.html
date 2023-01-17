@@ -12,6 +12,7 @@
 
 <ion-content  [fullscreen]="true" mode="ios">
 
+  
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)"  >
     <ion-refresher-content pullingIcon="lines"
     refreshingSpinner="bubbles"></ion-refresher-content>
@@ -29,7 +30,7 @@
         <ion-chip  color="tertiary" style=" width: 100%;">
           
           <ion-avatar>
-            <img alt="Silhouette of a person's head" src="{{post.userImage}}" />
+            <img alt="Silhouette of a person's head" src="{{post.profilePicture}}" />
           </ion-avatar>
           <ion-label  style="font-size: medium;">{{post.userName}}</ion-label>
           
@@ -39,8 +40,8 @@
       </ion-card-header>
     
       <ion-card-content>
-        <img class="imagePost" defaultImage="../../../assets/Ellie icon.png" [lazyLoad]="post.postImage" />
-        <ion-label  style="color: white; font-size: small" >Hace 20 min.</ion-label>
+        <img class="imagePost" defaultImage="../../../assets/Ellie icon.png" [lazyLoad]="post.picture" />
+        <ion-label  style="color: white; font-size: small" >{{post.date}}</ion-label>
         <ion-grid>
           <ion-row>
             <ion-col>

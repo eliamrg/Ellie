@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { collection, doc, DocumentData, Firestore, getDocs, onSnapshot, query, setDoc, where } from '@angular/fire/firestore';
+import { collection, doc, DocumentData, Firestore, getDocs, limit, onSnapshot, query, setDoc, Timestamp, where } from '@angular/fire/firestore';
+import { orderBy } from '@firebase/firestore';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -22,13 +23,14 @@ export class PostService {
       picture:picture,
       likes:0,
       likesList:[],
-      coments:[]
+      coments:[],
+      date: Timestamp.now()
     },{merge:true}).then(()=>console.log("Post Created"));
   }
 
-  getPosts(){
-    return onSnapshot(collection(this.firestore, "Posts"), (querySnapshot) => {
-       
+  async getPosts(){
+    const q = query(collection(this.firestore, "Posts"),orderBy("date","desc"), limit(2));
+    return onSnapshot(q, (querySnapshot) => {
       querySnapshot.forEach((doc) => {
         console.log(doc.id, " => ", doc.data());
       });   

@@ -205,6 +205,23 @@ export class UserService {
       return false;
     } 
   }
+
+
+  async getUserById(id:any){
+    const docRef = doc(this.firestore, "Users", id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return docSnap.data();
+    } else {
+      // doc.data() will be undefined in this case
+      return null;
+}
+  }
+
+
+
+
 }
 
 

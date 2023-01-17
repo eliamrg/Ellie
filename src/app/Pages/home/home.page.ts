@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
+import { collection,startAfter,orderBy, doc, DocumentData, Firestore, getDocs, limit, onSnapshot, query, setDoc, Timestamp, where } from '@angular/fire/firestore';
+
 //import logo from '../../../assets/Ellie icon.png'
 @Component({
   selector: 'app-home',
@@ -9,58 +12,25 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomePage implements OnInit {
 
-  
 
-  constructor(private userService:UserService) { }
-
+  constructor(private userService:UserService,
+              private postsService: PostService,
+              private firestore:Firestore) { }
+  ngOnInit() {
+      
+      this.userName=this.userService.getUserName();
+    }
   userName:any;
 
-  posts=[
-    {
-      userImage:'../../../assets/icon circle.png',
-      userName:this.userService.getUserName(),
-      caption:'Nada como la lluvia y un buen libro 👌🏻👌🏻🔥',
-      postImage:'https://images.pexels.com/photos/3640930/pexels-photo-3640930.jpeg?cs=srgb&dl=pexels-ena-marinkovic-3640930.jpg&fm=jpg',
-    }
-  ]
+  posts:any=[ ]
 
-
+  unsubscribe=this.getPosts();
   
-  ngOnInit() {
-
-    
-    this.userName=this.userService.getUserName();
-  }
-
 
   private generateItems() {
-    let newPost:any;
-    newPost=
-      {
-      userImage:'../../../assets/icon circle.png',
-      userName:this.userService.getUserName(),
-      caption:'Hello',
-      postImage:'https://lh3.googleusercontent.com/hwau7OVWx96XaME5KpRuJ0I_MscrerK6SbRH1UwYHYaxIDQQtn7RZK02LDSfBzCreidFgDsJeXyqDct6EZiH6vsV=w640-h400-e365-rj-sc0x00ffffff',
-    };
-    
-    this.posts.push(newPost);
-    newPost=
-      {
-      userImage:'../../../assets/icon circle.png',
-      userName:this.userService.getUserName(),
-      caption:'Bye',
-      postImage:'https://img.freepik.com/vector-premium/adios-bandera-grahpic-antigua-bandera-moda-vintage-texto-bye-bye-bandera-vintage-bandera-cinta-grahpic-dibujado-mano_136321-1593.jpg?w=2000',
-    };
-    this.posts.push(newPost);
-    newPost=
-      {
-      userImage:'../../../assets/icon circle.png',
-      userName:this.userService.getUserName(),
-      caption:'Estas en un ciclo del que no vas a salir:)',
-      postImage:'https://images.squarespace-cdn.com/content/v1/621d3bdf0f7c7c414579182f/5adb17f6-2e30-451a-b5c3-7ecf2fc3640a/WeAreTheLoopBannerSmall.png',
-    };
-    this.posts.push(newPost);
+    console.log(this.snapshot)
   }
+  
   onIonInfinite(ev:any) {
     this.generateItems();
     setTimeout(() => {
@@ -75,4 +45,27 @@ export class HomePage implements OnInit {
     }, 2000);
   };
 
+  q:any;
+  snapshot:any
+
+ 
+  async getPosts(){
+    this.q = query(collection(this.firestore, "Posts"),orderBy("date","desc"), limit(1));
+    this.snapshot= onSnapshot(this.q, (querySnapshot:any) => {
+      querySnapshot.forEach((doc:any) => {
+        let post=doc.data()
+        this.userService.getUserById(post["user"]).then(user=>{
+          if (user!=null){
+            post["id"]=doc.id;
+            post["profilePicture"]=user["profilePicture"]
+            post["userName"]=user["displayName"]
+            let date=(post["date"] as Timestamp)
+            post["date"]= date.toDate().toLocaleString();
+            
+            this.posts.push(post);
+          }
+        })
+      });   
+    });
+  }
 }

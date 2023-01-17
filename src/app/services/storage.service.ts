@@ -32,7 +32,7 @@ export class StorageService {
         url=URL;
       })
     });
-    console.log(url);
+    
     return url;
 
   }

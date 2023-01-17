@@ -37,8 +37,7 @@ export class CreatePostPage implements OnInit {
     await loading.present();
     let date = new Date().valueOf().toString();
     this.storageService.uploadPostPicture(date,this.croppedImage).then(photoUrl=>{
-      console.log("photoURL", photoUrl);
-      console.log("caption",this.caption);
+      
       this.posts.createPost(date,this.caption,photoUrl).then(()=>{
         this.loadingCtrl.dismiss();
         this.presentAlert();
