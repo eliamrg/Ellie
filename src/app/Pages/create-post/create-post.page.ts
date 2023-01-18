@@ -66,65 +66,65 @@ export class CreatePostPage implements OnInit {
 
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
-}
-imageLoaded() {
-    this.loadingCtrl.dismiss();
-}
-cropperReady() {
-    // cropper ready
-}
-loadImageFailed() {
-    // show message
-}
-rotate(){
-  const newValue=((this.transform.rotate ?? 0)+ 90) % 360;
-  this.transform={
-    ...this.transform,
-    rotate:newValue
-  };
-}
+  }
+  imageLoaded() {
+      this.loadingCtrl.dismiss();
+  }
+  cropperReady() {
+      // cropper ready
+  }
+  loadImageFailed() {
+      // show message
+  }
+  rotate(){
+    const newValue=((this.transform.rotate ?? 0)+ 90) % 360;
+    this.transform={
+      ...this.transform,
+      rotate:newValue
+    };
+  }
 
-flipHorizontal(){
-  this.transform={
-    ...this.transform,
-    flipH:!this.transform.flipH
-  };
-}
+  flipHorizontal(){
+    this.transform={
+      ...this.transform,
+      flipH:!this.transform.flipH
+    };
+  }
 
-flipVertical(){
-  this.transform={
-    ...this.transform,
-    flipV:!this.transform.flipV
-  };
-}
-acceptPicture(){
+  flipVertical(){
+    this.transform={
+      ...this.transform,
+      flipV:!this.transform.flipV
+    };
+  }
+  acceptPicture(){
 
-  this.imageAccepted=true;
-  this.picture=null;
-  
-}
-dismissPicture(){
-  this.imageAccepted=false;
-  this.picture=null;
-}
+    this.imageAccepted=true;
+    this.picture=null;
+    
+  }
+  dismissPicture(){
+    this.imageAccepted=false;
+    this.picture=null;
+  }
 
-async presentAlert() {
-  const alert = await this.alertController.create({
-    header: 'Post Created',
-    backdropDismiss:false,
-    buttons: [ {
-      text: 'OK',
-      role: 'confirm',
-      handler: () => {
-        this.router.navigate(['/dashboard/home']).then(() => {
-          window.location.reload();
-        });
-      },
-    },],
-  });
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Posted!',
+      backdropDismiss:false,
+      buttons: [ {
+        text: 'OK',
+        role: 'confirm',
+        handler: () => {
+          this.router.navigate(['/dashboard/home']).then(() => {
+            window.location.reload();
+          });
+        },
+      },],
+    });
 
-  await alert.present();
-}
+    await alert.present();
+  }
 
 
 
