@@ -7,6 +7,7 @@ import { ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
 
 import { PostService } from 'src/app/services/post.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-create-post',
@@ -19,12 +20,14 @@ export class CreatePostPage implements OnInit {
               private loadingCtrl: LoadingController,
               private storageService:StorageService,
               private alertController: AlertController,
-              private router: Router) { }
+              private router: Router,
+              private userService: UserService) { }
 
   ngOnInit() {
-      
+    this.verified=this.userService.checkEmailVerified();
   }
 
+  verified:any;
   picture:any=null;
   imageAccepted = false;
   caption="";

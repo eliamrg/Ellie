@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content mode="ios">
+<ion-content  mode="ios">
 
   
   <ion-header collapse="condense">
@@ -15,8 +15,8 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="posts">
-    <ion-card >
+  <div class="posts" *ngIf="verified; else elseBlock">
+    <ion-card class="cardVerfied" >
       <ion-card-header>
           <ion-card-title style="text-align: center;">Say something to the world:</ion-card-title>
          
@@ -113,6 +113,27 @@
     </ion-card> 
   </div>
 
+  <ng-template #elseBlock>
+    <ion-card style="text-align: center;" class="notVerified" color="transparent">
+      <ion-card-header>
+        <ion-card-title>Feature Blocked</ion-card-title>
+        
+      </ion-card-header>
+    
+      <ion-card-content>
+        Please verify your email to continue
+        <br><br>
+        <ion-item color="light" lines="none">
+          Profile > Settings > Send Email Verification
+          <ion-button color="transparent" slot="end" href="/dashboard/settings"> 
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+        
+        
+      </ion-card-content>
+    </ion-card>
+</ng-template>
   
 
 </ion-content>

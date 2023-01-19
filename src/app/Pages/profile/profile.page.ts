@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import User  from '../../interfaces/user.interface';
 import { UserService } from 'src/app/services/user.service';
 import { userInfo } from 'os';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,7 +11,8 @@ import { userInfo } from 'os';
 })
 export class ProfilePage implements OnInit {
 
-  constructor(private userService:UserService) {
+  constructor(private userService:UserService,
+              private postService:PostService) {
     
    }
 
@@ -25,20 +27,31 @@ export class ProfilePage implements OnInit {
   };
   
    
-
+  myPosts:any=[
+    {
+      id:"",
+      picture:""
+    }
+  ];
   
   ngOnInit() {
+
+    
+    this.postService.getUserPosts(this.userService.getUserId()).then(res=>{
+      this.myPosts=res;
+      
+      this.myPosts.reverse();
+    });
+    
     this.userService.getFirestoreUser(this.userService.getUserId()).then(
       res=>{
         this.UserInfo=res;
         console.log(res);
       }
     );
-    /*
-    this.userName=this.userService.getUserName();
-    this.photoURL=this.userService.getUserPic();*/
+    
   }
-
+/*
    myPosts: string[] = [
     'https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tfGVufDB8fDB8fA%3D%3D&w=1000&q=80', 
     'https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tfGVufDB8fDB8fA%3D%3D&w=1000&q=80', 
@@ -48,7 +61,7 @@ export class ProfilePage implements OnInit {
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG2hWDH1n8qcBSyfaHwjhpZiiqN0xtRVvHzUjaQBUtEAb1CSSpH6id4pYslRU4THY7xDw&usqp=CAU',
     'https://i1.sndcdn.com/artworks-000204735105-v7u4bd-t500x500.jpg',
     'https://preview.redd.it/qks6c12552i41.png?auto=webp&s=a593ed5115f68435cef0873f56b915fc5539b8fc'
-  ];
+  ];*/
   friendsPosts: string[] = [
     'https://images.unsplash.com/photo-1605749439419-80c81f67eefc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zmxvd2VycyUyMGFlc3RoZXRpY3xlbnwwfHwwfHw%3D&w=1000&q=80', 
     'https://images.unsplash.com/photo-1619045119136-349759036541?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHVycGxlJTIwYWVzdGhldGljfGVufDB8fDB8fA%3D%3D&w=1000&q=80', 

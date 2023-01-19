@@ -25,7 +25,8 @@
       <ion-col size="12">{{UserInfo.description}}</ion-col>
     </ion-row>
     <ion-row class="ion-text-center ">
-      <ion-col size="4">{{myPosts.length}}</ion-col>
+      <ion-col *ngIf="myPosts[0].id=='' else elseBlock" size="4">0</ion-col>
+      <ng-template #elseBlock><ion-col size="4">{{myPosts.length||0}}</ion-col></ng-template>
       <ion-col size="4">2</ion-col>
       <ion-col size="4">3</ion-col>
     </ion-row>
@@ -49,14 +50,33 @@
       </ion-segment>
     </ion-row>
     <ion-row *ngIf="visiblePosts=='myPosts'">
-      <ion-col 
-        size="4" 
-        *ngFor="let image of myPosts" >
-        <ion-thumbnail class="posts-tumbnail" >
-          <img defaultImage="../../../assets/Ellie icon.png" [lazyLoad]="image" alt="posts"  (click)="goToImage(image)"/>
-        </ion-thumbnail>
+      <div *ngIf="myPosts[0].id==''">
+        <ion-card style="text-align: center;" color="transparent">
+          <ion-card-header>
+            <ion-card-title>It's seems you haven't posted anything yet</ion-card-title>
+            
+          </ion-card-header>
         
-      </ion-col>
+          <ion-card-content>
+            Click the camera to make your First Post
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div *ngIf="myPosts[0].id!=''">
+        <ion-grid>
+          <ion-row>
+            <ion-col 
+              size="4" 
+              *ngFor="let post of myPosts" 
+              >
+              <ion-thumbnail class="posts-tumbnail" >
+                <img defaultImage="../../../assets/Ellie icon.png" [lazyLoad]="post.picture" alt="posts"  (click)="goToImage(post.picture)"/>
+              </ion-thumbnail>
+              
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
     </ion-row>
     <ion-row *ngIf="visiblePosts=='friendsPosts'">
       <ion-col 

@@ -37,6 +37,21 @@ export class PostService {
     });
   }
 
+  async getUserPosts(Userid:any){
+    let posts: { id: string; picture: any; }[]=[]
+    const q = query(collection(this.firestore, "Posts"),where("user","==",Userid));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      
+      let post={
+        id:doc.id,
+        picture:doc.data()["picture"]
+      }
+      posts.push(post)
+    });
+    return posts;
+  }
+
 
 
 }
